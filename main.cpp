@@ -1,46 +1,125 @@
 #include <iostream>
 #include <vector>
-#include "funcs.h"
+#include "Stack.h"
+#include "Node.h"
+#include "Queue.h"
 
 int main(){
-	std::cout << "Tesing Task A" << std::endl;
-	std::cout << "Initializing vector elements [0,4] << std::endl;
-	std::vector<int> vec1 = makeVector(5);
-	for (int i=0; i<vec1.size(); i++){
-		std::cout << vec1[i] << " ";
-	}
-	std::cout << "\n\n";
-	 
-	std::cout << "Tesing Task B" << std::endl;
-	std::cout << "Initialized vector{-1,-2,-5,0,2,3,1,5}, expecting new vector to contain {2,3,1,5}" << std::endl;
-	std::vector<int> vec2{-1,-2,-5,0,2,3,1,5};
-	std::vector<int> vec2Out = goodVibes(vec2);
-	for (int i=0; i<vec2Out.size(); i++){
-		std::cout << vec2Out[i] << " ";
-	}
-	std::cout << "\n\n";
-	 
-	std::cout << "Tesing Task C" << std::endl;
-	std::cout <<"Initialized vector1{-1,-2,0,2,3} and vector2{4,5} expecting new vector to contain {-1,-2,0,2,3,4,5} and vector2 be empty";
-	std::vector<int> vec3A{-1,-2,0,2,3};
-	std::vector<int> vec3B{4,5};
-	std::vector<int> vec3Out = gogeta(vec3A, vec3B);
-	for (int i=0; i<vec3A.size(); i++){
-		std::cout << vec3A[i] << " ";
-	}
-	std::cout << std::endl;
-	std::cout << "vector2 size = " + vec3B.size();
-	std::cout << "\n\n";
+	//STACK
+	//push method
+	std::cout << "TESTING PUSH METHOD" << "\n";
+	Stack *stack0 = new Stack();
+	std::cout << "pushing Node with data value '3' to stack0" << "\n";
+	stack0->push(3);
+	std::cout << "stack0 current size: " << stack0->getSize() << "\n";
+	std::cout << "stack0 elements: " << stack0->to_string() << "\n";
+	std::cout << "\n";
 	
-	std::cout << "Tesing Task D" << std::endl;
-	std::cout << "Initialized vector1{-1,5,2} and vector2{-2,3,0,6}, expecting new vector to contain {-3,8,2,6}
-	std::vector<int> vec4A{-1,5,2};
-	std::vector<int> vec4B{-2,3,0,6};
-	std::vector<int> vec4Out = sumPairWise(vec4A, vec4B);
-	for (int i=0; i<vec4Out.size(); i++){
-		std::cout << vec4Out[i] << " ";
-	}
-	std::cout << "\n\n";
+	std::cout << "pushing Node with data value '4' to stack0" << "\n";
+	stack0->push(4);
+	std::cout << "stack0 current size: " << stack0->getSize() << "\n";
+	std::cout << "stack0 elements: " << stack0->to_string() << "\n";
+	std::cout << "\n";
+		
+	std::cout << "pushing Node with data value '5' to stack0" << "\n";
+	stack0->push(5);
+	std::cout << "stack0 current size: " << stack0->getSize() << "\n";
+	std::cout << "stack0 elements: " << stack0->to_string() << "\n";
+	std::cout << "\n";
+		
+	std::cout << "pushing Node with data value '6' to stack0" << "\n";
+	stack0->push(6);
+	std::cout << "stack0 current size: " << stack0->getSize() << "\n";
+	std::cout << "stack0 elements: " << stack0->to_string() << "\n";
+	std::cout << "\n";
+		
+	//pop method
+	std::cout << "TESTING POP METHOD" << "\n";
+	std::cout << "popping top element" << "\n";
+	stack0->pop();
+	std::cout << "stack0 current size: " << stack0->getSize() << "\n";
+	std::cout << "stack0 elements: " << stack0->to_string() << "\n";
+	std::cout << "\n";
+	
+	std::cout << "popping top element" << "\n";
+	stack0->pop(); 
+	std::cout << "stack0 current size: " << stack0->getSize() << "\n";
+	std::cout << "stack0 elements: " << stack0->to_string() << "\n";
+	std::cout << "\n";
+	
+	//Exception Handling Message
+	std::cout << "TESTING POP METHOD EXCEPTION HANDLING (STACK SIZE IS 0)" << "\n";
+	Stack *stackException = new Stack();
+	std::cout << "stack1 current size: " << stackException->getSize() << "\n";
+	std::cout << "stack1 elements: " << stackException->to_string() << "\n";
+	std::cout << "popping top element (return value of -1 means an exception is caught)" << "\n";
+	std::cout << stackException->pop() << "\n"; //Exception Message should appear in console
+	std::cout << "\n";
+		
+	//Top method + Exception Handling Message
+	std::cout << "TESTING TOP METHOD" << "\n";
+	Stack *stackException1 = new Stack();
+	std::cout << "stack2 current size: " << stackException1->getSize() << "\n";
+	std::cout << "stack2 elements: " << stackException1->to_string() << "\n";
+	std::cout << "retrieving data value for top element..." << "\n";
+	std::cout << stackException1->top() << "\n";
+	std::cout << "\n";
+		
+	std::cout << "pushing Node with data value '50' to stack2" << "\n";
+	stackException1->push(50);
+	std::cout << "stack2 current size: " << stackException1->getSize() << "\n";
+	std::cout << "stack2 elements: " << stackException1->to_string() << "\n";
+	std::cout << "retrieving data value for top element (return value of -1 means an exception is caught)" << "\n";
+	std::cout << stackException1->top() << "\n";
+	std::cout << "\n";
+	
+	//Deleting Stacks
+	std::cout << "Deleting stack0" << "\n";
+	delete stack0;
+	std::cout << "stack0 current size: " << stack0->getSize() << "\n";
+	std::cout << "stack0 elements: " << stack0->to_string() << "\n";
+	std::cout << "\n";
+	
+	std::cout << "Deleting stack1" << "\n";
+	delete stackException;
+	std::cout << "stack1 current size: " << stackException->getSize() << "\n";
+	std::cout << "stack1 elements: " << stackException->to_string() << "\n";
+	std::cout << "\n";
+	
+	std::cout << "Deleting stack2" << "\n";
+	delete stackException1;
+	std::cout << "stack2 current size: " << stackException1->getSize() << "\n";
+	std::cout << "stack2 elements: " << stackException1->to_string() << "\n";
+	std::cout << "\n";
+	
+	//QUEUE
+	std::cout << "TESTING QUEUE OF SIZE 4" << "\n";
+	Queue *queue = new Queue();
+	std::cout << "Enqueuing integers '1', '2', '3', and '4' to queue" << "\n";
+	queue->enqueue(1);
+	queue->enqueue(2);
+	queue->enqueue(3);
+	queue->enqueue(4);
+	std::cout << "Printing queue ";
+	std::cout << queue->to_string() << "\n";
+	std::cout << "\n";
+	
+	std::cout << "Dequeuing each integer one by one until queue is empty" << "\n";
+	queue->dequeue();
+	std::cout << "Printing queue ";
+	std::cout << queue->to_string() << "\n";
+	
+	queue->dequeue();
+	std::cout << "Printing queue ";
+	std::cout << queue->to_string() << "\n";
+	
+	queue->dequeue();
+	std::cout << "Printing queue ";
+	std::cout << queue->to_string() << "\n";
+	
+	queue->dequeue();
+	std::cout << "Printing queue ";
+	std::cout << queue->to_string() << "\n";
 	return 0;
 }	
 

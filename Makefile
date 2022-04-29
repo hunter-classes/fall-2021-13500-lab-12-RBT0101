@@ -1,17 +1,24 @@
-main: main.o funcs.o
-	g++ -std=c++11 -o main main.o funcs.o
+tests: tests.o Node.o Stack.o Queue.o
+	g++ -std=c++11 -o tests tests.o Node.o Stack.o Queue.o
 
-tests: tests.o funcs.o
-	g++ -std=c++11 -o tests tests.o funcs.o
+main: main.o Node.o Stack.o Queue.o
+	g++ -std=c++11 -o main main.o Node.o Stack.o Queue.o
 
-main.o: main.cpp funcs.h
-	g++ -std=c++11 -c main.cpp;
+main.o: main.cpp Node.h Stack.h
+	g++ -std=c++11 -c main.cpp
 	
-tests.o: tests.cpp funcs.h
-	g++ -std=c++11 -c tests.cpp;
+tests.o: tests.cpp Node.h Stack.h
+	g++ -std=c++11 -c tests.cpp
 	
-funcs.o: funcs.cpp
-	g++ -std=c++11 -c funcs.cpp;
+Queue.o: Queue.cpp 
+	g++ -std=c++11 -c Queue.cpp
+	
+Node.o: Node.cpp
+	g++ -std=c++11 -c Node.cpp
+	
+Stack.o: Stack.cpp Node.h
+	g++ -std=c++11 -c Stack.cpp
 
 clean:
-	rm -f main tests main.o tests.o funcs.o
+	rm -f *.o main tests
+

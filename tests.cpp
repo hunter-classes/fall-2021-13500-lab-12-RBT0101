@@ -1,72 +1,58 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include <vector>
-#include "funcs.h"
+#include "Node.h"
+#include "Stack.h"
+#include "Queue.h"
 
-TEST_CASE("Testing Task A"){
-	std::vector<int> v1A = makeVector(-6);
-	std::vector<int> v1B = makeVector(0);
-	std::vector<int> v1C = makeVector(10);
-	std::vector<int> v1COut = {0,1,2,3,4,5,6,7,8,9};
-	CHECK(v1A.size() == 0);
-	CHECK(v1B.size() == 0);
-	CHECK(v1C == v1COut);
+TEST_CASE("Testing Stack"){
+	Stack *stack0 = new Stack();
+	//TESTING PUSH METHOD
+	stack0->push(3);
+	CHECK(stack0->top() == 3);
+	
+	stack0->push(4);
+	CHECK(stack0->top() == 4);
+	
+	stack0->push(5);
+	CHECK(stack0->top() == 5);
+	
+	//TESTING POP METHOD
+	CHECK(stack0->pop() == 5);
+	CHECK(stack0->pop() == 4);
+	CHECK(stack0->pop() == 3);
+	
+	//TESTING ISEMPTY METHOD
+	CHECK(stack0->is_empty() == true);
 }
 
-TEST_CASE("Testing Task B"){
-	std::vector<int> v2A{-1,-3,-4,1,2,5};
-	std::vector<int> v2B{0,0,2,4,100,-11023,12031};
-	std::vector<int> v2C{-1,-2,-3,-4,-5};
+TEST_CASE("Testing Queue of Size 4"){
+	//TESTING FRONT METHOD
+	Queue *queue0 = new Queue();
+	queue0->enqueue(1);
 	
-	//Output from method
-	std::vector<int> v2AOut = goodVibes(v2A);
-	std::vector<int> v2BOut = goodVibes(v2B);
-	std::vector<int> v2COut = goodVibes(v2C);
+	Queue *queue1 = new Queue();
+	queue1->enqueue(5);
 	
-	//Expected output
-	std::vector<int> v2AE{1,2,5};
-	std::vector<int> v2BE{2,4,100,12031};
-	std::vector<int> v2CE{};
+	Queue *queue2 = new Queue();
+	queue2->enqueue(9);
+		
+	CHECK(queue0->front() == 1);
+	CHECK(queue1->front() == 5);
+	CHECK(queue2->front() == 9);
 	
-	CHECK (v2AOut == v2AE);
-	CHECK (v2BOut == v2BE);
-	CHECK (v2COut == v2CE);
-}
+	Queue *queue3 = new Queue();
+	queue0->enqueue(2);
+	queue0->enqueue(3);
+	queue0->enqueue(4);
 
-TEST_CASE("Testing Task C"){
-	std::vector<int> v3A{1,2,3};
-	std::vector<int> v3B{0,0,-5,6};
-	std::vector<int> v3C{-1,-2};
-	std::vector<int> v3D{5};
-	
-	gogeta(v3A, v3B);
-	gogeta(v3C, v3D);
-	
-	std::vector<int> v3AE = {1,2,3,0,0,-5,6};
-	std::vector<int> v3BE = {};
-	std::vector<int> v3CE = {-1,-2,5};
-	std::vector<int> v3DE = {};
-	
-	CHECK (v3A == v3AE);
-	CHECK (v3B == v3BE);
-	CHECK (v3C == v3CE);
-	CHECK (v3D == v3DE);
-}
-
-TEST_CASE("Testing Task D"){
-	std::vector<int> v4A{1,-6,-2};
-	std::vector<int> v4B{0,3,1,5};
-	std::vector<int> v4C{-1,0,-1,1,2};
-	std::vector<int> v4D{5,1,-5,3};
-	
-	std::vector<int> v4ABOut = sumPairWise(v4A, v4B);
-	std::vector<int> v4CDOut = sumPairWise(v4C, v4D);
-	
-	std::vector<int> v4ABE{1,-3,-1,5};
-	std::vector<int> v4CDE{4,1,-6,4,2};
-	
-	CHECK(v4ABOut == v4ABE);
-	CHECK(v4CDOut == v4CDE);
+	//TESTING DEQUEUE AND IS_EMPTY AND IS_FULL METHODS
+	CHECK(queue0->is_full());
+	CHECK(queue0->dequeue() == 1);
+	CHECK(queue0->dequeue() == 2);
+	CHECK(queue0->dequeue() == 3);
+	CHECK(queue0->dequeue() == 4);
+	CHECK(queue0->is_empty());
 }
 
 
